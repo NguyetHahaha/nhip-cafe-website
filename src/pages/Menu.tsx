@@ -63,7 +63,7 @@ const itemAnimation = {
 
 // Simple React components for animation placeholders
 const MotionDiv = ({ children, className, ...props }) => (
-  <div className={className} {...props}>
+  <div className={className || ""} {...props}>
     {children}
   </div>
 );
@@ -104,7 +104,7 @@ const Menu = () => {
                 className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
               >
                 {PRODUCTS.map((product) => (
-                  <MotionDiv key={product.id}>
+                  <MotionDiv key={product.id} className="menu-item">
                     <MenuCard 
                       id={product.id}
                       name={product.name}
@@ -148,7 +148,7 @@ const Menu = () => {
                   className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
                 >
                   {PRODUCTS.filter(p => p.category === 'vi-nhip').map((product) => (
-                    <MotionDiv key={product.id}>
+                    <MotionDiv key={product.id} className="menu-item">
                       <MenuCard 
                         id={product.id}
                         name={product.name}
