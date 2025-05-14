@@ -1,12 +1,194 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import { Coffee, CupSoda, MapPin, Clock } from "lucide-react";
+import { Link } from "react-router-dom";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import Hero from "@/components/Hero";
+import MenuCard from "@/components/MenuCard";
+
+const PRODUCTS = [
+  { 
+    id: 'nhip-but-pha',
+    name: 'Nhịp Bứt Phá',
+    description: 'Cà phê Đen Đá',
+    priceM: 29000,
+    priceL: 45000,
+    image: '/lovable-uploads/81d2d26a-7516-4a3f-9e9a-9a5a8a3fd3e1.png',
+  },
+  { 
+    id: 'nhip-can-bang',
+    name: 'Nhịp Cân Bằng',
+    description: 'Cà phê Sữa Đá',
+    priceM: 32000,
+    priceL: 49000,
+    image: '/lovable-uploads/6a1662a2-ef72-431d-9f12-309f4d7d1b1f.png',
+  },
+  { 
+    id: 'nhip-diu-em',
+    name: 'Nhịp Dịu Êm',
+    description: 'Cà phê Bạc Xỉu',
+    priceM: 35000,
+    priceL: 55000,
+    image: '/lovable-uploads/f68917f9-f3df-4c8c-8328-612699c8452d.png',
+  },
+  { 
+    id: 'nhip-bay-bong',
+    name: 'Nhịp Bay Bổng',
+    description: 'Cà phê Cốt Dừa',
+    priceM: 37000,
+    priceL: 57000,
+    image: '/lovable-uploads/28d980de-d5b2-4d4d-b4fe-769b7ed2803c.png',
+  },
+];
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen flex flex-col">
+      <Navbar />
+      <Hero />
+      
+      {/* Features */}
+      <section className="section-padding bg-cream">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-10 text-coffee-dark">
+            Trải Nghiệm <span className="text-gradient">Nhịp Cà Phê</span>
+          </h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="bg-white p-6 rounded-lg shadow-md text-center flex flex-col items-center">
+              <Coffee className="h-12 w-12 text-coffee mb-4" />
+              <h3 className="text-xl font-semibold mb-2">Cà Phê Chất Lượng</h3>
+              <p className="text-gray-600">Hạt cà phê được chọn lọc kỹ càng từ vùng nguyên liệu tốt nhất</p>
+            </div>
+            
+            <div className="bg-white p-6 rounded-lg shadow-md text-center flex flex-col items-center">
+              <CupSoda className="h-12 w-12 text-coffee mb-4" />
+              <h3 className="text-xl font-semibold mb-2">Công Thức Độc Đáo</h3>
+              <p className="text-gray-600">Những công thức pha chế riêng biệt tạo nên hương vị đặc trưng</p>
+            </div>
+            
+            <div className="bg-white p-6 rounded-lg shadow-md text-center flex flex-col items-center">
+              <MapPin className="h-12 w-12 text-coffee mb-4" />
+              <h3 className="text-xl font-semibold mb-2">Không Gian Độc Đáo</h3>
+              <p className="text-gray-600">Không gian thiết kế riêng biệt, phù hợp cho mọi nhịp cảm xúc</p>
+            </div>
+            
+            <div className="bg-white p-6 rounded-lg shadow-md text-center flex flex-col items-center">
+              <Clock className="h-12 w-12 text-coffee mb-4" />
+              <h3 className="text-xl font-semibold mb-2">Phục Vụ Tận Tâm</h3>
+              <p className="text-gray-600">Mở cửa từ 8h00 đến 23h30 cùng đội ngũ phục vụ tận tâm</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      {/* Featured Products */}
+      <section className="section-padding">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 text-coffee-dark">
+            Thức Uống Nổi Bật
+          </h2>
+          <p className="text-center text-gray-600 mb-10 max-w-xl mx-auto">
+            Khám phá những thức uống đặc biệt của Nhịp Cà Phê, tạo nên từ hạt cà phê tươi và nguyên liệu chọn lọc
+          </p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {PRODUCTS.map((product) => (
+              <MenuCard 
+                key={product.id}
+                id={product.id}
+                name={product.name}
+                description={product.description}
+                priceM={product.priceM}
+                priceL={product.priceL}
+                image={product.image}
+                isHighlighted={product.id === 'nhip-can-bang'}
+              />
+            ))}
+          </div>
+          
+          <div className="mt-10 text-center">
+            <Link
+              to="/menu"
+              className="inline-block bg-coffee text-white hover:bg-coffee-dark transition px-6 py-3 rounded-md font-semibold"
+            >
+              Xem Thêm Menu
+            </Link>
+          </div>
+        </div>
+      </section>
+      
+      {/* Collection Highlight */}
+      <section className="section-padding bg-coffee bg-opacity-10">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+            <div>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-coffee-dark">
+                Bộ Sưu Tập "Vị Nhịp"
+              </h2>
+              <p className="text-gray-700 mb-6">
+                Bộ sưu tập "Vị Nhịp" mang đến trải nghiệm cà phê đa dạng, phù hợp với từng cung bậc cảm xúc. 
+                Từ năng lượng bứt phá của Nhịp Bứt Phá, đến sự êm dịu của Nhịp Dịu Êm - mỗi hương vị đều được 
+                chúng tôi chăm chút tỉ mỉ để đồng hành cùng bạn trong mọi khoảnh khắc.
+              </p>
+              <Link
+                to="/menu?collection=vi-nhip"
+                className="inline-block bg-coffee text-white hover:bg-coffee-dark transition px-6 py-3 rounded-md font-semibold"
+              >
+                Khám phá ngay
+              </Link>
+            </div>
+            
+            <div className="relative">
+              <img 
+                src="/lovable-uploads/922c840c-288f-4673-b209-3d6c980e97cd.png"
+                alt="Bộ sưu tập Vị Nhịp" 
+                className="rounded-lg shadow-lg w-full object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      {/* Promotion */}
+      <section className="section-padding">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+            <div className="order-2 lg:order-1 relative">
+              <img 
+                src="/lovable-uploads/c1bb8e3d-5b8e-4454-a9ae-573ffa3dd79d.png"
+                alt="Khuyến mãi tháng 5" 
+                className="rounded-lg shadow-lg w-full object-cover"
+              />
+            </div>
+            
+            <div className="order-1 lg:order-2">
+              <div className="inline-block mb-4 py-1 px-3 bg-coffee text-white rounded-full">
+                Khuyến mãi đặc biệt
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-coffee-dark">
+                Tag Truyền Cảm Hứng Quà Nạp Năng Lượng
+              </h2>
+              <p className="text-gray-700 mb-3">
+                Từ 5/5 đến 31/5, Nhịp Cà Phê tặng bạn bộ đôi tiếp sức cho ngày dài:
+              </p>
+              <ul className="list-disc list-inside space-y-2 mb-6 text-gray-700">
+                <li>Tag truyền cảm hứng đặc biệt</li>
+                <li>Quà nạp năng lượng kèm theo mỗi đơn hàng</li>
+                <li>Miễn phí với mỗi cốc "Vị Nhịp" size L</li>
+              </ul>
+              <Link
+                to="/news"
+                className="inline-block bg-coffee text-white hover:bg-coffee-dark transition px-6 py-3 rounded-md font-semibold"
+              >
+                Xem chi tiết
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <Footer />
     </div>
   );
 };
