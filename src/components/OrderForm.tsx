@@ -20,9 +20,10 @@ import {
   RadioGroup,
   RadioGroupItem,
 } from "@/components/ui/radio-group";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Package, Truck } from 'lucide-react';
+import { Package, Truck, X, Plus, Minus, Gift, Tag } from 'lucide-react';
 
 const PRODUCTS = [
   { 
@@ -32,6 +33,7 @@ const PRODUCTS = [
     priceM: 29000,
     priceL: 45000,
     image: '/lovable-uploads/81d2d26a-7516-4a3f-9e9a-9a5a8a3fd3e1.png',
+    category: 'vi-nhip',
   },
   { 
     id: 'nhip-can-bang',
@@ -40,6 +42,7 @@ const PRODUCTS = [
     priceM: 32000,
     priceL: 49000,
     image: '/lovable-uploads/6a1662a2-ef72-431d-9f12-309f4d7d1b1f.png',
+    category: 'vi-nhip',
   },
   { 
     id: 'nhip-diu-em',
@@ -48,6 +51,7 @@ const PRODUCTS = [
     priceM: 35000,
     priceL: 55000,
     image: '/lovable-uploads/f68917f9-f3df-4c8c-8328-612699c8452d.png',
+    category: 'vi-nhip',
   },
   { 
     id: 'nhip-bay-bong',
@@ -56,8 +60,27 @@ const PRODUCTS = [
     priceM: 37000,
     priceL: 57000,
     image: '/lovable-uploads/28d980de-d5b2-4d4d-b4fe-769b7ed2803c.png',
+    category: 'vi-nhip',
   },
 ];
+
+const INSPIRATION_TAGS = [
+  "Hãy luôn là phiên bản tốt nhất của chính mình.",
+  "Niềm tin tạo nên sức mạnh, và sức mạnh tạo nên thành công.",
+  "Chỉ cần một tách cà phê để thay đổi ngày của bạn.",
+  "Đừng đếm giờ, hãy tận hưởng từng khoảnh khắc.",
+  "Hôm nay sẽ là một ngày tuyệt vời, hãy bắt đầu với một tách cà phê.",
+  "Những giấc mơ lớn bắt đầu từ những niềm tin nhỏ.",
+];
+
+interface OrderItem {
+  productId: string;
+  size: string;
+  ice: string;
+  sugar: string;
+  quantity: number;
+  note: string;
+}
 
 interface OrderFormProps {
   initialProductId?: string;
@@ -65,34 +88,89 @@ interface OrderFormProps {
 
 export default function OrderForm({ initialProductId }: OrderFormProps) {
   const { toast } = useToast();
-  const [product, setProduct] = useState(initialProductId || PRODUCTS[0].id);
-  const [size, setSize] = useState('M');
-  const [ice, setIce] = useState('100');
-  const [sugar, setSugar] = useState('100');
-  const [note, setNote] = useState('');
+  const [orderItems, setOrderItems] = useState<OrderItem[]>([
+    {
+      productId: initialProductId || PRODUCTS[0].id,
+      size: 'M',
+      ice: '100',
+      sugar: '100',
+      quantity: 1,
+      note: '',
+    }
+  ]);
   const [deliveryMethod, setDeliveryMethod] = useState('pickup');
-  const [quantity, setQuantity] = useState(1);
 
-  const selectedProduct = PRODUCTS.find(p => p.id === product);
+  const handleAddItem = () => {
+    setOrderItems([
+      ...orderItems,
+      {
+        productId: PRODUCTS[0].id,
+        size: 'M',
+        ice: '100',
+        sugar: '100',
+        quantity: 1,
+        note: '',
+      }
+    ]);
+  };
+
+  const handleRemoveItem = (index: number) => {
+    if (orderItems.length === 1) {
+      toast({
+        title: "Không thể xóa",
+        description: "Đơn hàng phải có ít nhất một sản phẩm.",
+        variant: "destructive",
+        duration: 3000,
+      });
+      return;
+    }
+    
+    const newItems = [...orderItems];
+    newItems.splice(index, 1);
+    setOrderItems(newItems);
+  };
+
+  const updateOrderItem = (index: number, field: keyof OrderItem, value: any) => {
+    const newItems = [...orderItems];
+    newItems[index] = { ...newItems[index], [field]: value };
+    setOrderItems(newItems);
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
     toast({
       title: "Đặt hàng thành công!",
-      description: `${selectedProduct?.name} (${size}) đã được thêm vào giỏ hàng.`,
+      description: `${orderItems.length} sản phẩm đã được thêm vào giỏ hàng.`,
       duration: 5000,
     });
 
     // Reset form or redirect to cart page
-    setQuantity(1);
-    setNote('');
+    setOrderItems([
+      {
+        productId: PRODUCTS[0].id,
+        size: 'M',
+        ice: '100',
+        sugar: '100',
+        quantity: 1,
+        note: '',
+      }
+    ]);
   };
 
-  const calculatePrice = () => {
-    if (!selectedProduct) return 0;
-    const basePrice = size === 'M' ? selectedProduct.priceM : selectedProduct.priceL;
-    return basePrice * quantity;
+  const calculateTotalPrice = () => {
+    return orderItems.reduce((total, item) => {
+      const product = PRODUCTS.find(p => p.id === item.productId);
+      if (!product) return total;
+      
+      const basePrice = item.size === 'M' ? product.priceM : product.priceL;
+      return total + (basePrice * item.quantity);
+    }, 0);
+  };
+
+  const getRandomInspirationTag = () => {
+    const randomIndex = Math.floor(Math.random() * INSPIRATION_TAGS.length);
+    return INSPIRATION_TAGS[randomIndex];
   };
 
   return (
@@ -104,93 +182,178 @@ export default function OrderForm({ initialProductId }: OrderFormProps) {
         </CardHeader>
         
         <CardContent className="space-y-6">
-          <div className="space-y-2">
-            <Label htmlFor="product">Chọn thức uống</Label>
-            <Select value={product} onValueChange={setProduct}>
-              <SelectTrigger id="product" className="w-full">
-                <SelectValue placeholder="Chọn thức uống" />
-              </SelectTrigger>
-              <SelectContent>
-                {PRODUCTS.map((item) => (
-                  <SelectItem key={item.id} value={item.id}>
-                    {item.name} - {item.description}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-          
-          <div>
-            <Label htmlFor="size">Kích cỡ</Label>
-            <RadioGroup id="size" value={size} onValueChange={setSize} className="flex space-x-4 mt-1">
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="M" id="size-m" />
-                <Label htmlFor="size-m" className="cursor-pointer">Size M ({selectedProduct?.priceM.toLocaleString()} VND)</Label>
+          {orderItems.map((item, index) => {
+            const selectedProduct = PRODUCTS.find(p => p.id === item.productId);
+            
+            return (
+              <div key={index} className="border rounded-lg p-4">
+                <div className="flex justify-between items-center mb-4">
+                  <h3 className="font-semibold text-lg">Sản phẩm {index + 1}</h3>
+                  {orderItems.length > 1 && (
+                    <button 
+                      type="button" 
+                      onClick={() => handleRemoveItem(index)}
+                      className="text-red-500 hover:bg-red-50 rounded-full p-1"
+                    >
+                      <X size={20} />
+                    </button>
+                  )}
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className="space-y-2 md:col-span-2">
+                    <Label htmlFor={`product-${index}`}>Chọn thức uống</Label>
+                    <div className="flex gap-4">
+                      <Select 
+                        value={item.productId} 
+                        onValueChange={(value) => updateOrderItem(index, 'productId', value)}
+                      >
+                        <SelectTrigger id={`product-${index}`} className="w-full">
+                          <SelectValue placeholder="Chọn thức uống" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {PRODUCTS.map((product) => (
+                            <SelectItem key={product.id} value={product.id}>
+                              {product.name} - {product.description}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    
+                    <div className="mt-4">
+                      <Label htmlFor={`size-${index}`}>Kích cỡ</Label>
+                      <RadioGroup 
+                        id={`size-${index}`} 
+                        value={item.size} 
+                        onValueChange={(value) => updateOrderItem(index, 'size', value)} 
+                        className="flex space-x-4 mt-1"
+                      >
+                        <div className="flex items-center space-x-2">
+                          <RadioGroupItem value="M" id={`size-m-${index}`} />
+                          <Label htmlFor={`size-m-${index}`} className="cursor-pointer">
+                            Size M ({selectedProduct?.priceM.toLocaleString()} VND)
+                          </Label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <RadioGroupItem value="L" id={`size-l-${index}`} />
+                          <Label htmlFor={`size-l-${index}`} className="cursor-pointer">
+                            Size L ({selectedProduct?.priceL.toLocaleString()} VND)
+                          </Label>
+                        </div>
+                      </RadioGroup>
+                      
+                      {item.size === 'L' && item.productId.includes('nhip') && (
+                        <div className="mt-2 flex items-start gap-2 text-sm bg-green-50 p-2 rounded-md text-green-700">
+                          <Gift className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                          <span>Tặng kèm 1 thanh năng lượng granola khi chọn size L</span>
+                        </div>
+                      )}
+                      
+                      {item.productId.includes('nhip') && (
+                        <div className="mt-2 flex items-start gap-2 text-sm bg-blue-50 p-2 rounded-md text-blue-700">
+                          <Tag className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                          <span>Tag truyền cảm hứng: "{getRandomInspirationTag()}"</span>
+                        </div>
+                      )}
+                    </div>
+                    
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+                      <div className="space-y-2">
+                        <Label htmlFor={`ice-${index}`}>Lượng đá</Label>
+                        <Select 
+                          value={item.ice} 
+                          onValueChange={(value) => updateOrderItem(index, 'ice', value)}
+                        >
+                          <SelectTrigger id={`ice-${index}`} className="w-full">
+                            <SelectValue placeholder="Chọn lượng đá" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="30">30%</SelectItem>
+                            <SelectItem value="50">50%</SelectItem>
+                            <SelectItem value="100">100%</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      
+                      <div className="space-y-2">
+                        <Label htmlFor={`sugar-${index}`}>Lượng đường</Label>
+                        <Select 
+                          value={item.sugar} 
+                          onValueChange={(value) => updateOrderItem(index, 'sugar', value)}
+                        >
+                          <SelectTrigger id={`sugar-${index}`} className="w-full">
+                            <SelectValue placeholder="Chọn lượng đường" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="30">30%</SelectItem>
+                            <SelectItem value="50">50%</SelectItem>
+                            <SelectItem value="100">100%</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+                    
+                    <div className="mt-4 space-y-2">
+                      <Label htmlFor={`quantity-${index}`}>Số lượng</Label>
+                      <div className="flex items-center space-x-2">
+                        <button 
+                          type="button"
+                          onClick={() => updateOrderItem(index, 'quantity', Math.max(1, item.quantity - 1))}
+                          className="w-8 h-8 flex items-center justify-center rounded-md border border-gray-300"
+                        >
+                          <Minus size={16} />
+                        </button>
+                        <span className="w-12 text-center">{item.quantity}</span>
+                        <button 
+                          type="button"
+                          onClick={() => updateOrderItem(index, 'quantity', item.quantity + 1)}
+                          className="w-8 h-8 flex items-center justify-center rounded-md border border-gray-300"
+                        >
+                          <Plus size={16} />
+                        </button>
+                      </div>
+                    </div>
+                    
+                    <div className="mt-4 space-y-2">
+                      <Label htmlFor={`note-${index}`}>Ghi chú đặc biệt</Label>
+                      <Textarea 
+                        id={`note-${index}`} 
+                        placeholder="Thêm ghi chú cho đơn hàng của bạn..." 
+                        value={item.note}
+                        onChange={(e) => updateOrderItem(index, 'note', e.target.value)}
+                        className="resize-none"
+                        rows={2}
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center justify-center">
+                    {selectedProduct && (
+                      <div className="text-center">
+                        <img 
+                          src={selectedProduct.image} 
+                          alt={selectedProduct.name}
+                          className="w-32 h-32 object-cover mx-auto rounded-lg shadow-md"
+                        />
+                        <p className="mt-2 font-medium text-coffee-dark">{selectedProduct.name}</p>
+                        <p className="text-sm text-gray-600">{selectedProduct.description}</p>
+                      </div>
+                    )}
+                  </div>
+                </div>
               </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="L" id="size-l" />
-                <Label htmlFor="size-l" className="cursor-pointer">Size L ({selectedProduct?.priceL.toLocaleString()} VND)</Label>
-              </div>
-            </RadioGroup>
-          </div>
+            );
+          })}
           
-          <div className="space-y-2">
-            <Label htmlFor="ice">Lượng đá</Label>
-            <Select value={ice} onValueChange={setIce}>
-              <SelectTrigger id="ice" className="w-full">
-                <SelectValue placeholder="Chọn lượng đá" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="30">30%</SelectItem>
-                <SelectItem value="50">50%</SelectItem>
-                <SelectItem value="100">100%</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-          
-          <div className="space-y-2">
-            <Label htmlFor="sugar">Lượng đường</Label>
-            <Select value={sugar} onValueChange={setSugar}>
-              <SelectTrigger id="sugar" className="w-full">
-                <SelectValue placeholder="Chọn lượng đường" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="30">30%</SelectItem>
-                <SelectItem value="50">50%</SelectItem>
-                <SelectItem value="100">100%</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-          
-          <div className="space-y-2">
-            <Label htmlFor="quantity">Số lượng</Label>
-            <div className="flex items-center space-x-2">
-              <button 
-                type="button"
-                onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                className="w-8 h-8 flex items-center justify-center rounded-md border border-gray-300"
-              >
-                -
-              </button>
-              <span className="w-12 text-center">{quantity}</span>
-              <button 
-                type="button"
-                onClick={() => setQuantity(quantity + 1)}
-                className="w-8 h-8 flex items-center justify-center rounded-md border border-gray-300"
-              >
-                +
-              </button>
-            </div>
-          </div>
-          
-          <div className="space-y-2">
-            <Label htmlFor="note">Ghi chú đặc biệt</Label>
-            <Textarea 
-              id="note" 
-              placeholder="Thêm ghi chú cho đơn hàng của bạn..." 
-              value={note}
-              onChange={(e) => setNote(e.target.value)}
-            />
+          <div className="flex justify-center">
+            <button 
+              type="button"
+              onClick={handleAddItem}
+              className="flex items-center gap-1 text-coffee hover:text-coffee-dark transition-colors"
+            >
+              <Plus size={18} /> Thêm sản phẩm
+            </button>
           </div>
           
           <div>
@@ -227,7 +390,7 @@ export default function OrderForm({ initialProductId }: OrderFormProps) {
         <CardFooter className="flex-col space-y-4">
           <div className="flex justify-between w-full text-lg font-semibold">
             <span>Tổng thanh toán:</span>
-            <span>{calculatePrice().toLocaleString()} VND</span>
+            <span>{calculateTotalPrice().toLocaleString()} VND</span>
           </div>
           <button 
             type="submit"

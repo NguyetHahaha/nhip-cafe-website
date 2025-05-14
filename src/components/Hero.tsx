@@ -1,13 +1,12 @@
 
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Coffee } from 'lucide-react';
 
 const heroImages = [
-  "/lovable-uploads/81d2d26a-7516-4a3f-9e9a-9a5a8a3fd3e1.png",
-  "/lovable-uploads/f68917f9-f3df-4c8c-8328-612699c8452d.png",
-  "/lovable-uploads/6a1662a2-ef72-431d-9f12-309f4d7d1b1f.png",
-  "/lovable-uploads/28d980de-d5b2-4d4d-b4fe-769b7ed2803c.png",
+  "https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=2047&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1559305616-3f99cd43e353?q=80&w=1935&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?q=80&w=2070&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?q=80&w=2070&auto=format&fit=crop",
 ];
 
 export default function Hero() {
@@ -47,7 +46,11 @@ export default function Hero() {
       <div className="absolute inset-0 flex flex-col items-center justify-center z-10">
         <div className="text-center max-w-3xl px-4">
           <div className="flex items-center justify-center mb-4">
-            <Coffee className="h-12 w-12 text-white mr-3" />
+            <img 
+              src="/lovable-uploads/13212ed4-9487-4396-98a0-b97b4b3a62c5.png" 
+              alt="Nhịp Cà Phê" 
+              className="h-14 w-auto mr-3" 
+            />
             <h1 className="text-5xl md:text-6xl font-bold text-white">Nhịp Cà Phê</h1>
           </div>
           <p className="text-xl md:text-2xl text-white my-6 italic">

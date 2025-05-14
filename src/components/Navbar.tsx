@@ -1,7 +1,7 @@
 
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Coffee, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -15,7 +15,11 @@ export default function Navbar() {
       <div className="container mx-auto px-4 py-3">
         <div className="flex justify-between items-center">
           <Link to="/" className="flex items-center gap-2">
-            <Coffee className="h-8 w-8 text-coffee" />
+            <img 
+              src="/lovable-uploads/13212ed4-9487-4396-98a0-b97b4b3a62c5.png" 
+              alt="Nhịp Cà Phê" 
+              className="h-10 w-auto" 
+            />
             <span className="text-2xl font-semibold text-coffee-dark">Nhịp Cà Phê</span>
           </Link>
 
@@ -35,6 +39,9 @@ export default function Navbar() {
             </Link>
             <Link to="/news" className="text-coffee hover:text-coffee-dark transition-colors">
               Tin tức & Sự kiện
+            </Link>
+            <Link to="/promotions" className="text-coffee hover:text-coffee-dark transition-colors">
+              Khuyến mãi & Tri ân
             </Link>
           </div>
 
@@ -86,6 +93,13 @@ export default function Navbar() {
               onClick={() => setIsMenuOpen(false)}
             >
               Tin tức & Sự kiện
+            </Link>
+            <Link 
+              to="/promotions" 
+              className="text-coffee hover:text-coffee-dark transition-colors"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Khuyến mãi & Tri ân
             </Link>
           </div>
         )}

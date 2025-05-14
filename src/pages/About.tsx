@@ -1,4 +1,3 @@
-
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -7,6 +6,7 @@ const About = () => {
     <div className="min-h-screen flex flex-col">
       <Navbar />
       
+      {/* Hero Header */}
       <div className="bg-coffee-dark text-white py-16">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Về Chúng Tôi</h1>
@@ -16,37 +16,93 @@ const About = () => {
         </div>
       </div>
       
-      {/* Story Section */}
-      <section className="py-16">
+      {/* Intro Section - Based on the provided image */}
+      <section className="py-16 bg-cream bg-opacity-40">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl font-bold mb-6 text-coffee-dark">Câu Chuyện Của Chúng Tôi</h2>
-              <p className="mb-4 text-gray-700">
-                Nhịp Cà Phê được ra đời từ tình yêu và niềm đam mê với hạt cà phê Việt Nam. Chúng tôi tin rằng mỗi tách cà phê 
-                không chỉ là thức uống mà còn là một nhịp điệu, một cảm xúc đặc biệt trong cuộc sống hàng ngày.
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-coffee-light bg-opacity-60 rounded-xl p-8 md:p-12 text-center text-white">
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">CÓ NHỮNG "NHỊP" LẶNG THẦM BÊN TA MỖI NGÀY...</h2>
+              
+              <p className="text-lg mb-6">
+                Cuộc sống là một <span className="font-bold">bản giao hưởng tuyệt vời</span>, được dệt nên
+                từ vô vàn những cung bậc cảm xúc.
               </p>
-              <p className="mb-4 text-gray-700">
-                Với sứ mệnh mang đến những trải nghiệm cà phê chất lượng cao và độc đáo, Nhịp Cà Phê luôn nỗ lực không ngừng 
-                trong việc chọn lọc nguyên liệu, nghiên cứu công thức và tạo ra những thức uống phù hợp với nhiều nhịp cảm xúc khác nhau.
+              
+              <p className="text-lg mb-6">
+                Chúng tôi tin rằng, mỗi ngụm thức uống bạn chọn không chỉ đơn 
+                thuần là một hương vị, mà còn là <span className="font-bold">một người bạn đồng điệu, một 
+                giai điệu tinh tế</span> có thể chạm vào và <span className="font-bold">sẻ chia những "nhịp" lòng ấy</span>.
               </p>
-              <p className="text-gray-700">
-                Chúng tôi tự hào khi được đồng hành cùng khách hàng trong mỗi ngày, từ những buổi sáng đầy năng lượng 
-                đến những chiều hoàng hôn tĩnh lặng, thông qua những tách cà phê được pha chế với tất cả tâm huyết và tình yêu.
-              </p>
-            </div>
-            <div className="relative h-[400px] rounded-lg overflow-hidden shadow-xl">
-              <img 
-                src="/lovable-uploads/361147e7-f60f-4ad4-abd8-f864dbd884f0.png" 
-                alt="Nhịp Cà Phê Collections"
-                className="w-full h-full object-cover"
-              />
             </div>
           </div>
         </div>
       </section>
       
-      {/* Brand Values */}
+      {/* Origin Story Section - Based on the provided image */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div>
+              <h2 className="text-3xl font-bold mb-6 text-coffee-dark">NHỊP SINH RA TỪ MONG ƯỚC ĐƯỢC SẺ CHIA...</h2>
+              
+              <p className="mb-6 text-gray-700">
+                Không chỉ bắt đầu từ tình yêu với những hạt cà phê 
+                Robusta Buôn Ma Thuột đậm đà, hay niềm say mê những lá 
+                trà thanh khiết, những vị quả tươi ngon, Nhịp được sinh ra 
+                với sứ mệnh: <span className="font-bold text-coffee-dark">được trở thành người bạn tri kỷ, một điểm 
+                chạm ấm áp, một nơi chốn mà ở đó, mọi cảm xúc của 
+                bạn đều được trân trọng.</span>
+              </p>
+              
+              <p className="text-gray-700">
+                Hơn cả một quán cà phê, hơn cả những ly thức uống,
+                Nhịp mong muốn trở thành một phần thân thương trong 
+                hành trình mỗi ngày của bạn. Nơi bạn có thể tìm thấy 
+                không chỉ sự tinh tảo, mà còn là sự sẻ chia, sự thấu hiểu và 
+                nguồn năng lượng tích cực để tiếp bước.
+              </p>
+            </div>
+            
+            <div className="flex items-center justify-center">
+              <div className="relative w-full h-full max-h-[500px]">
+                <img 
+                  src="/lovable-uploads/fe7498bd-4cb0-4916-ba13-6eb4f4b8dbc2.png" 
+                  alt="Nhịp Cà Phê Menu"
+                  className="w-full h-auto object-cover rounded-lg shadow-lg"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      {/* Philosophy Section - Based on the provided image */}
+      <section className="py-16 bg-cream bg-opacity-30">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-white p-8 rounded-lg shadow-lg">
+              <div className="text-right mb-4">
+                <svg className="inline-block w-10 h-10 text-coffee" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M14.017 18L14.017 10.609C14.017 4.905 17.748 1.039 23 0L23.995 2.151C21.563 3.068 20 5.789 20 8H24V18H14.017ZM0 18V10.609C0 4.905 3.748 1.038 9 0L9.996 2.151C7.563 3.068 6 5.789 6 8H9.983L9.983 18L0 18Z" />
+                </svg>
+              </div>
+              <div className="text-right">
+                <p className="text-lg text-gray-700 italic">
+                  Tại Nhịp, chúng tôi tin rằng, mỗi giọt 
+                  thức uống đều ẩn chứa một "nhịp" 
+                  riêng, một cá tính, một năng lượng độc 
+                  đáo, chờ đợi để được bạn khám phá
+                </p>
+                <div className="mt-4 border-t border-gray-300 pt-4 w-1/2 ml-auto">
+                  <span className="block text-coffee-dark font-semibold">Nhịp Cà Phê</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      {/* Brand Values - Keep as requested */}
       <section className="py-16 bg-coffee-light bg-opacity-10">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold mb-12 text-center text-coffee-dark">Giá Trị Cốt Lõi</h2>
@@ -93,40 +149,7 @@ const About = () => {
         </div>
       </section>
       
-      {/* Logo Meaning */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="flex flex-col md:flex-row items-center gap-8">
-              <div className="w-full md:w-1/3 flex justify-center">
-                <img 
-                  src="/lovable-uploads/11afd698-3c6a-4238-9bc1-a87d699edb98.png" 
-                  alt="Nhịp Cà Phê Logo"
-                  className="w-48 h-48"
-                />
-              </div>
-              
-              <div className="w-full md:w-2/3">
-                <h2 className="text-3xl font-bold mb-6 text-coffee-dark">Ý Nghĩa Logo</h2>
-                <p className="mb-4 text-gray-700">
-                  Logo của Nhịp Cà Phê được thiết kế với hình ảnh tách cà phê kết hợp với biểu đồ nhịp tim, 
-                  thể hiện thông điệp cốt lõi của thương hiệu: "Cà phê là nhịp đập của cuộc sống".
-                </p>
-                <p className="mb-4 text-gray-700">
-                  Đường nhịp tim biểu trưng cho cảm xúc và năng lượng mà cà phê mang lại, đồng thời nhắc nhở 
-                  chúng tôi luôn nỗ lực tạo ra những sản phẩm có thể đồng điệu với nhịp cảm xúc đa dạng của khách hàng.
-                </p>
-                <p className="text-gray-700">
-                  Màu nâu ấm áp được sử dụng chủ đạo tượng trưng cho hạt cà phê rang, cho sự thân thiện và gần gũi 
-                  mà chúng tôi muốn gửi gắm trong mỗi tách cà phê đến với khách hàng.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      {/* Call to Action */}
+      {/* Call to Action - Keep as requested */}
       <section className="py-16 bg-coffee text-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">Trải Nghiệm Nhịp Cà Phê Ngay Hôm Nay</h2>
