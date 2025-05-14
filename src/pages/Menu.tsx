@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -46,7 +45,7 @@ const PRODUCTS = [
   },
 ];
 
-// Add these lines to make TypeScript happy since the imported motion is not actually from framer-motion
+// Animation configurations
 const containerAnimation = {
   hidden: { opacity: 0 },
   show: {
@@ -60,11 +59,6 @@ const containerAnimation = {
 const itemAnimation = {
   hidden: { opacity: 0, y: 20 },
   show: { opacity: 1, y: 0 }
-};
-
-// For now, we'll fake the motion component since we haven't installed framer-motion
-const motion = {
-  div: (props: any) => <div {...props}>{props.children}</div>
 };
 
 const Menu = () => {
