@@ -9,7 +9,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <Coffee className="h-6 w-6" />
+              <img src="/lovable-uploads/89102af6-e261-4876-9ba4-184db96568b0.png" alt="Nhịp Cà Phê" className="h-10 w-auto" />
               <h3 className="text-xl font-semibold">Nhịp Cà Phê</h3>
             </div>
             <p className="mb-4 text-sm italic">Cùng bạn đồng hành mọi nhịp cảm xúc</p>
@@ -19,16 +19,21 @@ export default function Footer() {
             </div>
             <div className="flex items-start gap-2 mb-2">
               <MapPin className="h-5 w-5 mt-0.5" />
-              <p>123 Đường Nguyễn Huệ, Q.1, TP.HCM</p>
+              <p>79 Đ. Hồ Tùng Mậu, Mai Dịch, Quận 1, TP.HCM</p>
             </div>
             <div className="flex items-start gap-2 mb-2">
               <Phone className="h-5 w-5 mt-0.5" />
-              <p>+84 123 456 789</p>
+              <p>Hotline: 09999999</p>
             </div>
-            <div className="flex items-start gap-2">
+            <div className="flex items-start gap-2 mb-4">
               <Mail className="h-5 w-5 mt-0.5" />
-              <p>info@nhipcaphe.com</p>
+              <p>nhipcaphe@gmail.com</p>
             </div>
+            <p className="text-xs text-white/70">
+              Đề án của chúng tôi là 1 chiến lược - kế hoạch marketing giả định, giả lập. 
+              Các nội dung mà chúng tôi sản xuất để hỗ trợ cho đề án marketing của học phần 
+              marketing số. Mọi con số, thông tin đều giả lập phục vụ cho đề án.
+            </p>
           </div>
           
           <div>
@@ -45,6 +50,9 @@ export default function Footer() {
               </li>
               <li>
                 <Link to="/order" className="hover:underline">Đặt hàng</Link>
+              </li>
+              <li>
+                <Link to="/promotions" className="hover:underline">Khuyến mãi & Tri ân</Link>
               </li>
               <li>
                 <Link to="/news" className="hover:underline">Tin tức & Sự kiện</Link>

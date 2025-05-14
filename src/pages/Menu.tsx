@@ -1,6 +1,6 @@
+
 import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import MenuCard from "@/components/MenuCard";
@@ -61,6 +61,13 @@ const itemAnimation = {
   show: { opacity: 1, y: 0 }
 };
 
+// Simple React components for animation placeholders
+const MotionDiv = ({ children, className, ...props }) => (
+  <div className={className} {...props}>
+    {children}
+  </div>
+);
+
 const Menu = () => {
   const [searchParams] = useSearchParams();
   const collectionParam = searchParams.get('collection');
@@ -93,14 +100,11 @@ const Menu = () => {
             </div>
             
             <TabsContent value="all" className="mt-0">
-              <motion.div
+              <MotionDiv
                 className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
-                initial="hidden"
-                animate="show"
-                variants={containerAnimation}
               >
                 {PRODUCTS.map((product) => (
-                  <motion.div key={product.id} variants={itemAnimation}>
+                  <MotionDiv key={product.id}>
                     <MenuCard 
                       id={product.id}
                       name={product.name}
@@ -109,9 +113,9 @@ const Menu = () => {
                       priceL={product.priceL}
                       image={product.image}
                     />
-                  </motion.div>
+                  </MotionDiv>
                 ))}
-              </motion.div>
+              </MotionDiv>
             </TabsContent>
             
             <TabsContent value="vi-nhip" className="mt-0">
@@ -140,14 +144,11 @@ const Menu = () => {
                   </p>
                 </div>
                 
-                <motion.div
+                <MotionDiv
                   className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
-                  initial="hidden"
-                  animate="show"
-                  variants={containerAnimation}
                 >
                   {PRODUCTS.filter(p => p.category === 'vi-nhip').map((product) => (
-                    <motion.div key={product.id} variants={itemAnimation}>
+                    <MotionDiv key={product.id}>
                       <MenuCard 
                         id={product.id}
                         name={product.name}
@@ -156,9 +157,9 @@ const Menu = () => {
                         priceL={product.priceL}
                         image={product.image}
                       />
-                    </motion.div>
+                    </MotionDiv>
                   ))}
-                </motion.div>
+                </MotionDiv>
               </div>
             </TabsContent>
             
@@ -188,21 +189,6 @@ const Menu = () => {
               </div>
             </TabsContent>
           </Tabs>
-        </div>
-      </section>
-      
-      {/* Menu Info */}
-      <section className="py-8 bg-cream">
-        <div className="container mx-auto px-4 max-w-4xl">
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <h3 className="text-xl font-semibold mb-4 text-coffee-dark">Lưu ý khi đặt hàng</h3>
-            <ul className="list-disc list-inside space-y-2 text-gray-700">
-              <li>Giá trên chưa bao gồm 8% VAT</li>
-              <li>Nhịp Cà Phê có thể điều chỉnh giá và chương trình khuyến mãi mà không cần báo trước</li>
-              <li>Hình ảnh sản phẩm có thể khác với thực tế</li>
-              <li>Vui lòng thông báo với nhân viên nếu bạn có nhu cầu đặc biệt về thành phần</li>
-            </ul>
-          </div>
         </div>
       </section>
       
