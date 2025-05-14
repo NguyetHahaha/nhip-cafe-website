@@ -23,7 +23,7 @@ const PRODUCTS = [
     description: 'Cà phê Sữa Đá',
     priceM: 32000,
     priceL: 49000,
-    image: '/lovable-uploads/6a1662a2-ef72-431d-9f12-309f4d7d1b1f.png',
+    image: '/lovable-uploads/b1bf2636-5990-4a19-a3b2-07efb000fe22.png',
     category: 'vi-nhip',
   },
   { 
@@ -32,7 +32,7 @@ const PRODUCTS = [
     description: 'Cà phê Bạc Xỉu',
     priceM: 35000,
     priceL: 55000,
-    image: '/lovable-uploads/f68917f9-f3df-4c8c-8328-612699c8452d.png',
+    image: '/lovable-uploads/3adef3e3-ae21-4359-b3a9-4af34c045ad6.png',
     category: 'vi-nhip',
   },
   { 
@@ -41,7 +41,7 @@ const PRODUCTS = [
     description: 'Cà phê Cốt Dừa',
     priceM: 37000,
     priceL: 57000,
-    image: '/lovable-uploads/28d980de-d5b2-4d4d-b4fe-769b7ed2803c.png',
+    image: '/lovable-uploads/db42afe1-5e1d-451e-8239-38f3cd4bce1e.png',
     category: 'vi-nhip',
   },
 ];

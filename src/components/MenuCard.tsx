@@ -1,5 +1,6 @@
 
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 interface MenuCardProps {
   id: string;
@@ -21,18 +22,31 @@ export default function MenuCard({
   isHighlighted = false 
 }: MenuCardProps) {
   return (
-    <div 
+    <motion.div 
       className={`group bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 ${
         isHighlighted ? 'ring-2 ring-coffee' : ''
       }`}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      whileHover={{ 
+        y: -5,
+        transition: { duration: 0.2 }
+      }}
     >
       <div className="relative h-60 overflow-hidden">
-        <img
+        <motion.img
           src={image}
           alt={name}
-          className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+          className="w-full h-full object-cover object-center"
+          whileHover={{ scale: 1.05 }}
+          transition={{ duration: 0.5 }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-coffee-dark/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        <motion.div 
+          className="absolute inset-0 bg-gradient-to-t from-coffee-dark/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          initial={{ opacity: 0 }}
+          whileHover={{ opacity: 1 }}
+        />
       </div>
       
       <div className="p-5">
@@ -50,13 +64,18 @@ export default function MenuCard({
           </div>
         </div>
         
-        <Link
-          to={`/order?product=${id}`}
-          className="block w-full text-center bg-coffee text-white hover:bg-coffee-dark transition py-2 rounded-md"
+        <motion.div
+          whileHover={{ scale: 1.03 }}
+          whileTap={{ scale: 0.98 }}
         >
-          Đặt ngay
-        </Link>
+          <Link
+            to={`/order?product=${id}`}
+            className="block w-full text-center bg-coffee text-white hover:bg-coffee-dark transition py-2 rounded-md"
+          >
+            Đặt ngay
+          </Link>
+        </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 }
