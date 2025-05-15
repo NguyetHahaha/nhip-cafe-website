@@ -54,11 +54,6 @@
   body {
     @apply bg-background text-foreground font-montserrat;
   }
-
-  /* Better text handling */
-  p, h1, h2, h3, h4, h5, h6, li, span {
-    @apply break-words hyphens-auto;
-  }
 }
 
 /* Custom classes */
@@ -77,11 +72,6 @@
 .text-gradient {
   @apply bg-clip-text text-transparent;
   background-image: linear-gradient(135deg, #5E4029 0%, #8B5A2B 100%);
-}
-
-/* Text formatting */
-.preserve-line-breaks {
-  white-space: pre-line;
 }
 
 /* Animation classes */
@@ -133,3 +123,4 @@
 .hover-translate {
   @apply transition-transform duration-200 hover:translate-x-2;
 }
+
