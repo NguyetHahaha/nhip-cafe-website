@@ -141,11 +141,10 @@ export default function Hero() {
           </motion.p>
           
           <motion.p 
-            className="text-lg text-white mb-8 max-w-xl mx-auto bg-coffee-dark/50 p-4 rounded-lg backdrop-blur-sm shadow-lg"
+            className="text-lg text-white mb-8 max-w-xl mx-auto bg-coffee-dark/50 p-4 rounded-lg backdrop-blur-sm shadow-lg whitespace-pre-line"
             variants={descriptionVariants}
           >
-            Khám phá hương vị đặc biệt từ những hạt cà phê nguyên chất Việt Nam,
-            được chăm chút để tạo nên thức uống hoàn hảo cho mỗi cung bậc cảm xúc.
+            Khám phá hương vị đặc biệt từ những hạt cà phê nguyên chất Việt Nam, được chăm chút để tạo nên thức uống hoàn hảo cho mỗi cung bậc cảm xúc.
           </motion.p>
           
           <motion.div 
@@ -170,6 +169,17 @@ export default function Hero() {
               </Link>
             </motion.div>
           </motion.div>
+
+          <motion.p
+            className="text-white text-sm mt-8 max-w-md mx-auto bg-coffee-dark/50 p-3 rounded-lg backdrop-blur-sm"
+            initial={{ opacity: 0 }}
+            animate={{ 
+              opacity: 1,
+              transition: { delay: 1, duration: 0.8 }
+            }}
+          >
+            Nhịp Cà Phê - Người bạn đồng hành cùng bạn trẻ giữa hành trình cuộc sống sôi động tại Sài Gòn
+          </motion.p>
         </motion.div>
       </div>
 
@@ -221,6 +231,24 @@ export default function Hero() {
           repeatType: "loop",
           ease: "easeInOut",
           delay: 1
+        }}
+      />
+
+      {/* Coffee bean floating animations */}
+      <motion.div
+        className="absolute top-1/3 right-1/5 w-8 h-16 rounded-full bg-coffee/30 backdrop-blur-sm"
+        style={{ transform: "rotate(30deg)" }}
+        animate={{
+          y: [0, -15, 0],
+          rotate: [30, 40, 30],
+          opacity: [0.3, 0.6, 0.3],
+        }}
+        transition={{
+          duration: 6,
+          repeat: Infinity,
+          repeatType: "loop",
+          ease: "easeInOut",
+          delay: 2
         }}
       />
     </div>

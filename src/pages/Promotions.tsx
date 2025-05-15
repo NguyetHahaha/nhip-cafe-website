@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { useToast } from "@/hooks/use-toast";
 import { Gift, Award, Tag, Star, Percent, Calendar, User } from 'lucide-react';
@@ -35,14 +34,17 @@ const PROMOTIONS = [
     details: `
       <p>Từ 5/5 đến 31/5, Nhịp Cà Phê tặng bạn bộ đôi tiếp sức cho ngày dài:</p>
       <ul>
-        <li>Tag truyền cảm hứng đặc biệt với những thông điệp tích cực</li>
-        <li>Quà nạp năng lượng granola kèm theo mỗi đơn hàng</li>
-        <li>Miễn phí với mỗi cốc "Vị Nhịp" size L</li>
+        <li>Tag truyền cảm hứng đặc biệt với những thông điệp tích cực kèm theo mỗi ly "Vị Nhịp" bất kỳ</li>
+        <li>Thanh năng lượng tiện lợi & bổ dưỡng khi up-size lên Size L</li>
       </ul>
-      <p>Điều kiện áp dụng:</p>
+      
+      <p class="mt-4">Với sứ mệnh đồng hành cùng nhịp sống hiện đại ngày càng đa dạng, Nhịp Cà Phê tin rằng, sự đồng hành ý nghĩa nhất là khi có thể chạm đến bạn cả về TINH THẦN lẫn THỂ CHẤT. Đó chính là lý do chiếc Thẻ Tag với những lời nhắn gửi chân thành, như một cái vỗ về, một nguồn cảm hứng nhỏ, sẽ là người bạn đồng hành không thể thiếu trong những ly cà phê mà Nhịp gửi trao.</p>
+      
+      <p class="mt-4">Điều kiện áp dụng:</p>
       <ul>
         <li>Áp dụng cho tất cả khách hàng</li>
-        <li>Áp dụng cho các đơn hàng có ít nhất một sản phẩm từ bộ sưu tập "Vị Nhịp" size L</li>
+        <li>Tag truyền cảm hứng: Áp dụng với mọi sản phẩm từ bộ sưu tập "Vị Nhịp" (cả size M và L)</li>
+        <li>Thanh năng lượng: Chỉ áp dụng khi chọn size L</li>
         <li>Không áp dụng cùng các khuyến mãi khác</li>
       </ul>
     `

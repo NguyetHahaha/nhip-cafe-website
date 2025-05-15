@@ -51,7 +51,7 @@ export default function MenuCard({
       
       <div className="p-5">
         <h3 className="text-xl font-bold text-coffee-dark mb-2">{name}</h3>
-        <p className="text-gray-600 mb-4">{description}</p>
+        <p className="text-gray-600 mb-4 whitespace-pre-line">{description}</p>
         
         <div className="flex justify-between items-center mb-4">
           <div>
