@@ -237,8 +237,7 @@ const Index = () => {
               </p>
               <ul className="list-disc list-inside space-y-2 mb-6 text-gray-700">
                 <li className="transform transition-all duration-300 hover:translate-x-2">Tag truyền cảm hứng đặc biệt</li>
-                <li className="transform transition-all duration-300 hover:translate-x-2">Quà nạp năng lượng kèm theo mỗi đơn hàng</li>
-                <li className="transform transition-all duration-300 hover:translate-x-2">Miễn phí với mỗi cốc "Vị Nhịp" size L</li>
+                <li className="transform transition-all duration-300 hover:translate-x-2">Tặng thanh năng lượng cho mỗi cốc "Vị Nhịp" size L</li>
               </ul>
               <Link
                 to="/news"

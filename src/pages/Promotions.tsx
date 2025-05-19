@@ -304,7 +304,7 @@ export default function Promotions() {
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredPromotions.map((promo) => (
-                <Card key={promo.id} className="overflow-hidden">
+                <Card key={promo.id} className="overflow-hidden flex flex-col">
                   <div className="aspect-[4/3] relative">
                     <img 
                       src={promo.image} 
@@ -330,7 +330,7 @@ export default function Promotions() {
                     </div>
                   </CardContent>
                   
-                  <CardFooter>
+                  <CardFooter className="mt-auto">
                     <Dialog>
                       <DialogTrigger asChild>
                         <Button className="w-full bg-coffee text-white hover:bg-coffee-dark">Xem Chi Tiết</Button>
@@ -408,7 +408,7 @@ export default function Promotions() {
                           <ul className="text-sm space-y-1">
                             {rank.benefits.map((benefit, i) => (
                               <li key={i} className="flex items-start gap-2">
-                                <svg className="w-4 h-4 text-green-500 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <svg className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                                 </svg>
                                 <span>{benefit}</span>
