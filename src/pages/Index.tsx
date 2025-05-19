@@ -47,6 +47,7 @@ const Index = () => {
   const featuresRef = useRef(null);
   const productsRef = useRef(null);
   const collectionRef = useRef(null);
+  const storeRef = useRef(null);
   const promotionRef = useRef(null);
 
   // Simple intersection observer for scroll animations
@@ -68,7 +69,7 @@ const Index = () => {
 
     const observer = new IntersectionObserver(observerCallback, observerOptions);
     
-    const refs = [featuresRef, productsRef, collectionRef, promotionRef];
+    const refs = [featuresRef, productsRef, collectionRef, storeRef, promotionRef];
     refs.forEach(ref => {
       if (ref.current) {
         observer.observe(ref.current);
@@ -175,6 +176,43 @@ const Index = () => {
         </div>
       </section>
       
+      {/* Store Preview - New Section */}
+      <section className="section-padding bg-coffee-light bg-opacity-5">
+        <div 
+          ref={storeRef}
+          className="container mx-auto px-4 opacity-0 transition-opacity duration-1000"
+        >
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+            <div className="order-2 lg:order-1">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-coffee-dark">
+                Cửa hàng
+              </h2>
+              <p className="text-gray-700 mb-6 text-lg">
+                Nhịp Cà Phê - Nơi hương vị kể chuyện cảm xúc...
+              </p>
+              <p className="text-gray-700 mb-6">
+                Mỗi giọt thức uống tại Nhịp không chỉ là tinh túy từ những nguyên liệu chọn lọc, 
+                mà còn mang trong mình một "nhịp" riêng, chờ đợi để cùng bạn tạo nên những khoảnh khắc đáng nhớ.
+              </p>
+              <Link
+                to="/about"
+                className="inline-block bg-coffee text-white hover:bg-coffee-dark transition px-6 py-3 rounded-md font-semibold hover:scale-110 transform duration-200"
+              >
+                Về chúng tôi
+              </Link>
+            </div>
+            
+            <div className="order-1 lg:order-2 relative">
+              <img 
+                src="/lovable-uploads/9442e9b4-1066-47a7-bb42-c78e39a41912.png"
+                alt="Nhịp Cà Phê Store" 
+                className="rounded-lg shadow-lg w-full object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+      
       {/* Collection Highlight */}
       <section className="section-padding bg-coffee bg-opacity-10">
         <div 
@@ -201,9 +239,9 @@ const Index = () => {
             
             <div className="relative">
               <img 
-                src="/lovable-uploads/922c840c-288f-4673-b209-3d6c980e97cd.png"
+                src="/lovable-uploads/0969d087-8a5c-4ee6-9f60-17ca4e600476.png"
                 alt="Bộ sưu tập Vị Nhịp" 
-                className="rounded-lg shadow-lg w-full object-cover hover:scale-105 transition-transform duration-500"
+                className="rounded-lg shadow-lg w-full object-contain hover:scale-105 transition-transform duration-500"
               />
             </div>
           </div>
