@@ -35,9 +35,7 @@ export default function Footer() {
             </div>
             <div className="mt-4 text-xs italic text-white/70">
               <p>
-                Đề án của chúng tôi là 1 chiến lược - kế hoạch marketing giả định, giả lập. 
-                Các nội dung mà chúng tôi sản xuất để hỗ trợ cho đề án marketing của học phần marketing số. 
-                Mọi con số, thông tin đều giả lập phục vụ cho đề án.
+                Đây là sản phẩm giả định phục vụ cho học phần Marketing số, với mục đích phi thương mại và không có mục đích làm ảnh hưởng đến Thương hiệu của các doanh nghiệp được nhắc tới (nếu có)
               </p>
             </div>
           </div>
