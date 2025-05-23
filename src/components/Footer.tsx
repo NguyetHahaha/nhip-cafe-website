@@ -6,7 +6,7 @@ export default function Footer() {
   return (
     <footer className="bg-coffee-dark text-white py-12">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           <div>
             <div className="flex items-center gap-2 mb-4">
               <img 
@@ -35,7 +35,8 @@ export default function Footer() {
             </div>
             <div className="mt-4 text-xs italic text-white/70">
               <p>
-                Đây là sản phẩm giả định phục vụ cho học phần Marketing số, với mục đích phi thương mại và không có mục đích làm ảnh hưởng đến Thương hiệu của các doanh nghiệp được nhắc tới (nếu có)
+                Đây là sản phẩm giả định phục vụ cho học phần Marketing số, với mục đích phi thương mại và không có 
+                mục đích làm ảnh hưởng đến Thương hiệu của các doanh nghiệp được nhắc tới (nếu có)
               </p>
             </div>
           </div>
@@ -100,9 +101,9 @@ export default function Footer() {
           </div>
         </div>
         
-        <div className="mt-8 pt-8 border-t border-white/20 text-center">
+        {/* <div className="mt-8 pt-8 border-t border-white/20 text-center">
           <p>&copy; {new Date().getFullYear()} Nhịp Cà Phê. All rights reserved.</p>
-        </div>
+        </div> */}
       </div>
     </footer>
   );
