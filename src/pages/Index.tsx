@@ -1,11 +1,11 @@
 
-import { Coffee, CupSoda, MapPin, Clock } from "lucide-react";
+import { Coffee, CupSoda, MapPin, Clock, Volume2, VolumeX } from "lucide-react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import MenuCard from "@/components/MenuCard";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const PRODUCTS = [
   { 
@@ -51,6 +51,12 @@ const Index = () => {
   const promotionRef = useRef(null);
 
   // Simple intersection observer for scroll animations
+  const [isMuted, setIsMutated] = useState(false);
+  
+  const toggleMute = () => {
+    setIsMutated(!isMuted);
+  }
+
   useEffect(() => {
     const observerOptions = {
       root: null,
@@ -236,13 +242,23 @@ const Index = () => {
                 Khám phá ngay
               </Link>
             </div>
-            
             <div className="relative">
-              <img 
-                src="/lovable-uploads/0969d087-8a5c-4ee6-9f60-17ca4e600476.png"
-                alt="Bộ sưu tập Vị Nhịp" 
+              <video 
+                src="/lovable-uploads/0420.mp4" 
                 className="rounded-lg shadow-lg w-full object-contain hover:scale-105 transition-transform duration-500"
+                autoPlay
+                loop
+                muted={isMuted}
+                playsInline // Important for autoplay on mobile browsers
+                aria-label="Bộ sưu tập Vị Nhịp" // For accessibility, similar to alt text
               />
+              <button
+                onClick={toggleMute}
+                className="absolute bottom-4 right-4 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 transition-opacity"
+                aria-label={isMuted ? "Unmute video" : "Mute video"}
+              >
+                {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
+              </button>
             </div>
           </div>
         </div>

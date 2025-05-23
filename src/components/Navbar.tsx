@@ -16,7 +16,7 @@ export default function Navbar() {
         <div className="flex justify-between items-center">
           <Link to="/" className="flex items-center gap-2">
             <img 
-              src="/lovable-uploads/13212ed4-9487-4396-98a0-b97b4b3a62c5.png" 
+              src="/lovable-uploads/11afd698-3c6a-4238-9bc1-a87d699edb98.png" 
               alt="Nhịp Cà Phê" 
               className="h-10 w-auto" 
             />
