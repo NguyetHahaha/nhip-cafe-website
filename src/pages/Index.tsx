@@ -49,13 +49,34 @@ const Index = () => {
   const collectionRef = useRef(null);
   const storeRef = useRef(null);
   const promotionRef = useRef(null);
-
-  // Simple intersection observer for scroll animations
-  const [isMuted, setIsMutated] = useState(false);
+    // Simple intersection observer for scroll animations
+  const [isMuted, setIsMuted] = useState(true); // Start muted to increase chance of autoplay
+  const collectionVideoRef = useRef<HTMLVideoElement>(null);
   
   const toggleMute = () => {
-    setIsMutated(!isMuted);
+    setIsMuted(!isMuted);
   }
+
+  // Handle video autoplay
+  useEffect(() => {
+    if (collectionVideoRef.current) {
+      collectionVideoRef.current.play().catch(error => {
+        console.warn("Video autoplay was prevented:", error);
+        // If autoplay fails, ensure video is muted and try again
+        setIsMuted(true);
+        collectionVideoRef.current?.play().catch(e => {
+          console.error("Video autoplay still failed after muting:", e);
+        });
+      });
+    }
+  }, []);
+
+  // Handle mute toggle
+  useEffect(() => {
+    if (collectionVideoRef.current) {
+      collectionVideoRef.current.muted = isMuted;
+    }
+  }, [isMuted]);
 
   useEffect(() => {
     const observerOptions = {
@@ -64,23 +85,23 @@ const Index = () => {
       threshold: 0.1
     };
 
-    const observerCallback = (entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animate-fade-in');
-          entry.target.style.opacity = '1';
-        }
-      });
-    };
-
-    const observer = new IntersectionObserver(observerCallback, observerOptions);
-    
-    const refs = [featuresRef, productsRef, collectionRef, storeRef, promotionRef];
-    refs.forEach(ref => {
-      if (ref.current) {
-        observer.observe(ref.current);
+  const observerCallback = (entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate-fade-in');
+        entry.target.style.opacity = '1';
       }
     });
+  };
+
+  const observer = new IntersectionObserver(observerCallback, observerOptions);
+  
+  const refs = [featuresRef, productsRef, collectionRef, storeRef, promotionRef];
+  refs.forEach(ref => {
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+  });
 
     return () => {
       refs.forEach(ref => {
@@ -241,17 +262,19 @@ const Index = () => {
               >
                 Khám phá ngay
               </Link>
-            </div>
+            </div>            
             <div className="relative">
               <video 
-                src="/lovable-uploads/0420.mp4" 
+                ref={collectionVideoRef}
                 className="rounded-lg shadow-lg w-full object-contain hover:scale-105 transition-transform duration-500"
                 autoPlay
                 loop
                 muted={isMuted}
                 playsInline // Important for autoplay on mobile browsers
                 aria-label="Bộ sưu tập Vị Nhịp" // For accessibility, similar to alt text
-              />
+              >
+              <source src="/lovable-uploads/0420.mp4" type="video/mp4" />
+              </video>
               <button
                 onClick={toggleMute}
                 className="absolute bottom-4 right-4 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 transition-opacity"

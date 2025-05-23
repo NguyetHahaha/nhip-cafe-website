@@ -9,13 +9,33 @@ const About = () => {
   const [volume, setVolume] = useState(0.5); // Default volume when unmuted
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
-
+  // Handle video autoplay
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.play().catch(error => {
+        console.warn("Video autoplay was prevented:", error);
+        // If autoplay fails, ensure video is muted and try again
+        setIsMuted(true);
+        videoRef.current?.play().catch(e => {
+          console.error("Video autoplay still failed after muting:", e);
+        });
+      });
+    }
+  }, []);
+  
   // Effect to sync video volume with state (only when not muted)
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.volume = volume;
     }
   }, [volume]);
+
+  // Effect to sync muted state with video element
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.muted = isMuted;
+    }
+  }, [isMuted]);
 
   // Effect to listen for fullscreen changes
   useEffect(() => {
@@ -103,15 +123,14 @@ const About = () => {
       {/* About Us Video Section */}
       <section className="py-12 bg-cream">
         {/* This div will be the fullscreen element and relative parent for controls */}
-        <div className="container mx-auto px-4 relative group rounded-lg overflow-hidden shadow-2xl"> 
-            <video
+        <div className="container mx-auto px-4 relative group rounded-lg overflow-hidden shadow-2xl">            <video
               ref={videoRef}
               src="/lovable-uploads/about_us.mp4" 
               className="w-full h-auto block" // 'block' to remove extra space below video
-              autoPlay
-              loop
+              autoPlay={true}
+              loop={true}
               muted={isMuted} // Controlled by React state
-              playsInline
+              playsInline // Important for autoplay on mobile browsers
               aria-label="Video giới thiệu Nhịp Cà Phê"
             />
             {/* Controls Bar */}
